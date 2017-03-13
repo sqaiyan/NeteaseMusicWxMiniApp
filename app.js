@@ -322,10 +322,7 @@ app.get(dir + '/top/artist', function(request, response) {
 //新歌上架 ,type ALL, ZH,EA,KR,JP
 app.get(dir + '/top/songs', function(request, response) {
 	var data = {
-		'offset': request.query.offset,
-		'total': true,
-		'limit': request.query.limit,
-		'area': request.query.type,
+		'type':request.query.type,
 		"csrf_token": ""
 	}
 	var cookie = request.get('Cookie') ? request.get('Cookie') : (request.query.cookie ? request.query.cookie : '');
@@ -341,7 +338,7 @@ app.get(dir + '/top/album', function(request, response) {
 		"csrf_token": ""
 	}
 	var cookie = request.get('Cookie') ? request.get('Cookie') : (request.query.cookie ? request.query.cookie : '');
-	createWebAPIRequest('/weapi/album/new', data, cookie, response);
+	createWebAPIRequest('/weapi/discovery/new/albums/area', data, cookie, response);
 });
 //mv 排行,type ALL, ZH,EA,KR,JP
 app.get(dir + '/top/mv', function(request, response) {
@@ -388,6 +385,31 @@ app.get(dir + '/top/playlist/highquality', function(request, response) {
 	}
 	var cookie = request.get('Cookie') ? request.get('Cookie') : (request.query.cookie ? request.query.cookie : '');
 	createWebAPIRequest('/weapi/playlist/highquality/list', data, cookie, response);
+});
+//simi ,相似歌单，歌曲，关注的用户
+app.get(dir + '/simi/playlist', function(request, response) {
+	var data = {
+		'songid': request.query.id,
+		"csrf_token": ""
+	}
+	var cookie = request.get('Cookie') ? request.get('Cookie') : (request.query.cookie ? request.query.cookie : '');
+	createWebAPIRequest('/weapi/discovery/simiPlaylist', data, cookie, response);
+});
+app.get(dir + '/simi/song', function(request, response) {
+	var data = {
+		'songid': request.query.id,
+		"csrf_token": ""
+	}
+	var cookie = request.get('Cookie') ? request.get('Cookie') : (request.query.cookie ? request.query.cookie : '');
+	createWebAPIRequest('/weapi/v1/discovery/simiSong', data, cookie, response);
+});
+app.get(dir + '/simi/user', function(request, response) {
+	var data = {
+		'songid': request.query.id,
+		"csrf_token": ""
+	}
+	var cookie = request.get('Cookie') ? request.get('Cookie') : (request.query.cookie ? request.query.cookie : '');
+	createWebAPIRequest('/weapi/discovery/simiUser', data, cookie, response);
 });
 //评论
 app.get(dir + '/comments', function(request, response) {
