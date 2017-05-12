@@ -2,11 +2,22 @@ var Encrypt = require('./crypto.js');
 var express = require('express');
 var http = require('http');
 var crypto = require('crypto');
-var tough = require('tough-cookie');
-var Cookie = tough.Cookie;
+var bodyParser = require("body-parser");
 var app = express();
 var dir = "/v1"
-
+app.use(bodyParser.json({limit: '1mb'}));
+//var cors = require('cors')
+//app.use(cors({credentials: true}));
+app.use(bodyParser.urlencoded({extended: true}));
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://192.168.48.13:8080");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Credentials","true");
+    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+    res.header("X-Powered-By",' 3.2.1')
+    res.header("Content-Type", "application/json;charset=utf-8");
+    next();
+});
 function createWebAPIRequest(path, data, cookie, response, method) {
 	method = method ? method : "POST"
 	var music_req = '';
@@ -38,7 +49,6 @@ function createWebAPIRequest(path, data, cookie, response, method) {
 				music_req += chunk;
 			});
 			res.on('end', function() {
-				console.log(music_req);
 				if(music_req == '') {
 					createWebAPIRequest(path, data, cookie, response, method);
 					return;
@@ -48,6 +58,7 @@ function createWebAPIRequest(path, data, cookie, response, method) {
 						'Set-Cookie': res.headers['set-cookie'],
 					});
 					response.send({
+						code:200,
 						c: res.headers['set-cookie'],
 						i: JSON.parse(music_req)
 					});
@@ -88,30 +99,28 @@ function createRequest(path, method, data, callback) {
 	http_client.end();
 }
 
-app.get(dir + '/login/cellphone', function(request, response) {
-	var phone = request.query.phone;
-	var cookie = request.get('Cookie') ? request.get('Cookie') : (request.query.cookie ? request.query.cookie : '');
+app.post(dir + '/login/cellphone', function(request, response) {
+	var phone = request.body.phone;
 	var md5sum = crypto.createHash('md5');
-	md5sum.update(request.query.password);
+	md5sum.update(request.body.password);
 	var data = {
 		'phone': phone,
 		'password': md5sum.digest('hex'),
 		'rememberLogin': 'true'
 	};
-	createWebAPIRequest('/weapi/login/cellphone', data, cookie, response)
+	createWebAPIRequest('/weapi/login/cellphone', data, null, response)
 });
 
-app.get(dir + '/login', function(request, response) {
-	var email = request.query.email;
-	var cookie = request.get('Cookie') ? request.get('Cookie') : (request.query.cookie ? request.query.cookie : '');
+app.post(dir + '/login', function(request, response) {
+	var email = request.body.email;
 	var md5sum = crypto.createHash('md5');
-	md5sum.update(request.query.password);
+	md5sum.update(request.body.password);
 	var data = {
 		'username': email,
 		'password': md5sum.digest('hex'),
 		'rememberLogin': 'true'
 	};
-	createWebAPIRequest('/weapi/login', data, cookie, response)
+	createWebAPIRequest('/weapi/login', data, null, response)
 });
 
 //登录信息刷新
@@ -123,9 +132,9 @@ app.get(dir + '/login/refresh', function(request, response) {
 			csrf = cookie.value
 		}
 	}
-	csrf=request.query.t
+	csrf = request.query.t
 	var data = {
-		"csrf_token":csrf
+		"csrf_token": csrf
 	};
 	createWebAPIRequest('/weapi/login/token/refresh?csrf_token=' + csrf, data, cookie, response)
 });
@@ -322,7 +331,7 @@ app.get(dir + '/top/artist', function(request, response) {
 //新歌上架 ,type ALL, ZH,EA,KR,JP
 app.get(dir + '/top/songs', function(request, response) {
 	var data = {
-		'type':request.query.type,
+		'type': request.query.type,
 		"csrf_token": ""
 	}
 	var cookie = request.get('Cookie') ? request.get('Cookie') : (request.query.cookie ? request.query.cookie : '');
@@ -381,6 +390,8 @@ app.get(dir + '/top/playlist', function(request, response) {
 app.get(dir + '/top/playlist/highquality', function(request, response) {
 	var data = {
 		'cat': request.query.type,
+		'offset':request.query.offset,
+		"limit":request.query.limit,
 		"csrf_token": ""
 	}
 	var cookie = request.get('Cookie') ? request.get('Cookie') : (request.query.cookie ? request.query.cookie : '');
@@ -553,7 +564,9 @@ app.get(dir + '/music/detail', function(request, response) {
 	var id = parseInt(request.query.id);
 	var data = {
 		"id": id,
-		'c': JSON.stringify([{ id: id }]),
+		'c': JSON.stringify([{
+			id: id
+		}]),
 		"ids": '[' + id + ']',
 		"csrf_token": ""
 	};
@@ -680,6 +693,7 @@ app.get(dir + '/record', function(request, response) {
 //红心歌曲
 app.get(dir + '/likelist', function(request, response) {
 	var cookie = request.get('Cookie') ? request.get('Cookie') : (request.query.cookie ? request.query.cookie : '');
+	console.log(cookie,'1111111111111')
 	var data = {
 		uid: request.query.uid,
 		"csrf_token": ""
@@ -796,7 +810,7 @@ app.get(dir + '/dj/sub', function(request, response) {
 		"id": id,
 		"csrf_token": ""
 	}
-	createWebAPIRequest("/weapi/djradio/"+(request.query.t==1?'sub':'unsub'), data, cookie, response)
+	createWebAPIRequest("/weapi/djradio/" + (request.query.t == 1 ? 'sub' : 'unsub'), data, cookie, response)
 });
 //program like act
 app.get(dir + '/resource/like', function(request, response) {
@@ -806,7 +820,7 @@ app.get(dir + '/resource/like', function(request, response) {
 		"threadId": id,
 		"csrf_token": ""
 	}
-	createWebAPIRequest("/weapi/resource/"+(request.query.t==1?'like':'unlike'), data, cookie, response)
+	createWebAPIRequest("/weapi/resource/" + (request.query.t == 1 ? 'like' : 'unlike'), data, cookie, response)
 });
 //comment like act
 app.get(dir + '/comment/like', function(request, response) {
@@ -814,10 +828,10 @@ app.get(dir + '/comment/like', function(request, response) {
 	var cookie = request.get('Cookie') ? request.get('Cookie') : (request.query.cookie ? request.query.cookie : '');
 	var data = {
 		"threadId": request.query.origin,
-		commentId:id,
+		commentId: id,
 		"csrf_token": ""
 	}
-	createWebAPIRequest("/weapi/v1/comment/"+(request.query.t==1?'like':'unlike'), data, cookie, response)
+	createWebAPIRequest("/weapi/v1/comment/" + (request.query.t == 1 ? 'like' : 'unlike'), data, cookie, response)
 });
 //歌曲喜欢和删除 op=like or trash,songid,
 app.get(dir + '/song/tracks', function(request, response) {
@@ -901,6 +915,14 @@ app.get(dir + '/toplist/artist', function(request, response) {
 	};
 	createWebAPIRequest('/weapi/toplist/artist', data, cookie, response)
 })
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+    res.header("X-Powered-By",' 3.2.1')
+    res.header("Content-Type", "application/json;charset=utf-8");
+    next();
+});
 var server = app.listen(3000, function() {
 	console.log("启动App");
 });
