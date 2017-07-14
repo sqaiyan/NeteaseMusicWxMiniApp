@@ -6,7 +6,8 @@
   "dependencies": {
     "express": "^4.14.0",
     "tough-cookie": "^2.2.2",
-    "big-integer": "^1.6.15"
+    "big-integer": "^1.6.15",
+    "request":"^2"
   },
   "devDependencies": {},
   "scripts": {
