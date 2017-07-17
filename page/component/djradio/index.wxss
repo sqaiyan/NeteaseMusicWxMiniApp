@@ -1,0 +1,25 @@
+page{overflow-x: hidden}
+#artist_header{position: relative;height: 540rpx;overflow: hidden}
+#artist_header image{width: 100%;height:750rpx;position: absolute;left: 0;top:-105rpx}
+.tab-item{position: relative}
+.tab-item:after{position: absolute;right: -1rpx;top:26rpx;height:32rpx;width: 2rpx;background-color:#dfdfdf;content: "";overflow: hidden }
+.tbi-des{font-size: 20rpx;}
+
+.mvs .cover{padding-top: 56.2%}
+.mvs{padding-right:15rpx;}
+.mvs .tl_cnt{width: 352.5rpx;}
+
+.artist_des{padding:5rpx 15rpx;font-size:28rpx;color:#999;line-height: 1.5;display: block}
+#simiwrap{overflow: hidden}
+
+
+#djradio_info{margin-top:-1rpx;line-height: 1.4}
+#djradio_info view{padding:20rpx;font-size: 28rpx;border-top:1rpx solid #eee;}
+#djradio_info image{width: 80rpx;height: 80rpx;border-radius: 50%;vertical-align: middle;margin-right: 20rpx;}
+
+#ah_wrap{background-image: linear-gradient(rgba(255,255,255,0),rgba(0,0,0,.5));position: absolute;width: 100%;box-sizing: border-box;padding: 120rpx 20rpx 20rpx;z-index: 20;bottom: 0;left: 0;color: #fff;overflow: hidden;display: flex;align-items: center;flex-flow: row;justify-content: space-between;}
+#ah_wrap image{position: relative;left: auto;top: auto;}
+#ah_wrap .ahw_btn{border: 1rpx solid #fff;padding:10rpx 30rpx;float: right;font-size: 28rpx;border-radius:3em;background: rgba(0,0,0,.2)}
+
+.ahw_btn{ white-space: nowrap;}
+.ahw_name{flex: 0 0 400rpx;line-height: 1.2}

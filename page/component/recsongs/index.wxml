@@ -1,0 +1,48 @@
+<import src="../../../utils/image.wxml" />
+<view id="recs_header">
+  <image src="http://s2.music.126.net/style/web2/img/recmd_daily.jpg" mode="widthFix"></image>
+  <view id="date">
+    <text>{{date}}</text>
+    <image src="../../../image/cm2_daily_cal_bg@2x.png" mode="widthFix"></image>
+  </view>
+</view>
+<view class="plist-detail ml" wx:if="{{loading}}">
+  <view id="playall" bindtap="playall" class="flexlist flex-center">
+    <view class="flexlist">
+      <image src="../../../image/pl-playall.png" mode="widthFix" />
+      <text id="pa-count">播放全部 <text> (共{{songs.length}}首)</text>
+      </text>
+    </view>
+  </view>
+  <view wx:for-items="{{songs}}" wx:for-index="idx" wx:key="{{item.id}}" wx:for-item="re" class="songs  {{re.id==curplay?'cur':''}}">
+    <navigator url="../playing/index?id={{re.id}}&br={{re.privilege.maxbr}}" bindtap="playmusic" data-idx="{{idx}}">
+      <view class="flexlist flex-center">
+        <view class="flexlist">
+          <view class="flexleft flexnum" wx:if="{{re.id==curplay}}">
+            <template is="image" data="{{src:'../../../image/aal.png',width:36}}" />
+          </view>
+          <view class="flexmain">
+            <view>{{re.name}}</view>
+            <view class="relistdes">{{re.artists[0].name}}-{{re.album.name}}</view>
+          </view>
+          <view class="flexact">
+            <view catchtap="mv" wx-if="{{re.mvid!=0}}" data-mvid="{{re.mvid}}" class="fa_list fa_mv">
+              <navigator url="../mv/index?id={{re.mvid}}">
+                <image src="../../../image/l0.png" mode="widthFix" />
+              </navigator>
+            </view>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+</view>
+<block wx:else>
+  <view class="cntloading">加载中...
+    <view>
+      <text class="cl1"></text>
+      <text class="cl2"></text>
+      <text class="cl3"></text>
+    </view>
+  </view>
+</block>

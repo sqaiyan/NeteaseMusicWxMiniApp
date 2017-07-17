@@ -1,0 +1,16 @@
+
+#plh_action view text{display: block;padding-bottom:.5em;line-height: 2}
+
+.topindex{color: red}
+.playingidx{width: 38rpx;height:38rpx;}
+.ftp{display: block;color: #888;font-size: 18rpx;padding-top: 10rpx;}
+.ftp image{width:18rpx;display: inline-block;vertical-align: middle;overflow: hidden;margin-right: 5rpx;}
+.ftp image.tpnew{width:38rpx}
+
+#cloud_percent{text-align: center;background: #ddd;border-radius: 2em;height: 1em;font-size: 24rpx;position: relative;flex: 1;line-height: 1;overflow: hidden}
+#cloud_percent view{position: absolute;background: #d33a31;height: 100%;left: 0;top: 0;border-radius: 2em}
+
+
+.pld-mv image {
+	width: 78rpx;height:63rpx;
+}

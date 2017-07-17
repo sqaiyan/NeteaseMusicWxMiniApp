@@ -1,0 +1,59 @@
+<import src="../../../utils/playlist.wxml" />
+<import src="../../../utils/image.wxml" />
+<import src="../../../utils/pageplay.wxml" />
+<import src="../../../utils/loading.wxml" />
+<template is="pp" data="{{music:music,playing:playing,playtype:playtype}}" />
+<view id="artist_header">
+  <image src="../../../image/cm2_default_act_320@2x.jpg" />
+  <image src="{{djradio.picUrl}}?param=750y750" />
+  <view id="ah_wrap">
+    <view class="ahw_name">{{djradio.name}}</view>
+    <view class="ahw_btn" bindtap="djradio_sub">
+      <template wx:if="{{!djrado.subed}}" is="image" data="{{src:'../../../image/cm2_list_icn_subscribe@2x.png',width:28}}" />
+      <template wx:if="{{djrado.subed}}" is="image" data="{{src:'../../../image/cm2_pro_btn_icn_subed@2x.png',width:28}}" /> 订阅({{djradio.subCount}})</view>
+  </view>
+</view>
+<view id="djradio_info">
+  <view>
+    <image src="{{djradio.dj.avatarUrl}}" mode="aspectFill" class="playingidx" />{{djradio.name}}
+  </view>
+  <view>
+    <text class="tags">{{djradio.category}}</text>{{djradio.desc}}</view>
+</view>
+<view class="sm_title">共{{programs.count}}期</view>
+<view class="page_pp">
+  <view wx:for-items="{{programs.programs}}" wx:for-index="idx" wx:key="{{item.id}}" wx:for-item="re">
+    <view class="songs {{(re.id==curplay)?'cur':''}}">
+      <navigator url="{{'../program/index?id='+re.mainSong.id+'&that.globalData.curplaypid='+re.id}}" bindtap="playmusic" data-idx="{{idx}}">
+        <view class="flexlist flex-center">
+          <view class="flexleft flexnum ">
+            <block wx:if="{{re.id===curplay}}">
+              <template is="image" data="{{src:'../../../image/aal.png',width:36}}" />
+            </block>
+            <block wx:else>
+              <text>{{idx+1}}</text>
+            </block>
+          </view>
+          <view class="flexlist">
+            <view class="flexmain">
+              <view>{{re.name}}</view>
+              <view class="relistdes">
+                <text>{{re.createTime}} </text>
+                <template is="image" wx:if="{{re.liked}}" data="{{src:'../../../image/xg.png',width:32}}" />
+                <text> {{re.likedCount}}</text>
+                <template is="image" data="{{src:'../../../image/cm2_list_icn_play24@2x.png',width:32}}" />
+                <text> {{re.listenerCount}}</text>
+              </view>
+            </view>
+            <view class="flexact">
+              <text>{{re.duration}}</text>
+            </view>
+          </view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+
+  <!-- loading-->
+  <template is="loading" wx:if="{{!loading||programs.more}}" />
+</view>

@@ -1,0 +1,66 @@
+<import src="../../../utils/loading.wxml" />
+<import src="../../../utils/image.wxml" />
+<template is="loading" wx:if="{{!loading}}"/>
+<block wx:else>
+<block wx:if="{{pl.length}}">
+<view class="sm_title">包含这首歌的歌单</view>
+<view class='flex-boxlist'>
+        <view class="tl_cnt" wx:for-items="{{pl}}" wx:key="{{item.id}}">
+          <navigator url="../playlist/index?pid={{item.id}}&from=toplist">
+            <view class="cover">
+              <image src="{{item.coverImgUrl}}?param=200y200" class="music_cover" />
+              <view class="img_playcount">
+                <image src="../../../image/p0.png" />{{item.playCount}}</view>
+            </view>
+            <view class="tl_info">
+              <view>{{item.name}}</view>
+              <view class="tli_des"><template is="image" data="{{src:'../../../image/cm2_icn_userhead@2x.png',width:24}}"/> {{item.creator.nickname}}</view>
+            </view>
+          </navigator>
+        </view>
+      </view>
+</block>
+<block wx:if="{{song.length}}">
+<view class="sm_title">喜欢这首歌的人你也听</view>
+<view wx:for-items="{{song}}" wx:for-index="idx" wx:key="{{item.id}}" wx:for-item="re" class="songs ml  {{re.id==curplay?'cur':''}}">
+    <navigator url="../playing/index?id={{re.id}}&br={{re.privilege.maxbr}}" bindtap="playmusic" data-idx="{{idx}}">
+      <view class="flexlist flex-center">
+        <view class="flexlist">
+          <view class="flexleft flexnum" wx:if="{{re.id==curplay}}">
+            <template is="image" data="{{src:'../../../image/aal.png',width:36}}" />
+          </view>
+          <view class="flexmain">
+            <view>{{re.name}}</view>
+            <view class="relistdes">{{re.artists[0].name}}-{{re.album.name}}</view>
+          </view>
+          <view class="flexact">
+            <view catchtap="mv" wx-if="{{re.mvid!=0}}" data-mvid="{{re.mvid}}" class="fa_list fa_mv">
+              <navigator url="../mv/index?id={{re.mvid}}">
+                <image src="../../../image/l0.png" mode="widthFix" />
+              </navigator>
+            </view>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+</block>
+<block wx:if="{{user.length}}">
+<view class="sm_title">喜欢这首歌的人</view>
+<view wx:for="{{user}}" class=" userprofiles" wx:for-item="re" wx:key="{{re}}">
+        <navigator url="../user/index?id={{re.userId}}" class="flexlist flex-image">
+          <view class="flexleft fl-image">
+            <image src="{{re.avatarUrl}}?param=100y100" class="user_avator" />
+          </view>
+          <view class="flexlist">
+            <view class="flexmain">
+              <view>{{re.nickname}} <image src="../../../image/cm2_pro_icn_boy@2x.png" wx:if="{{re.gender==1}}" />
+                <image src="../../../image/cm2_pro_icn_girl@2x.png" wx:if="{{re.gender!=1}}" /></view>
+              <view class="relistdes">{{re.recommendReason}}</view>
+            </view>
+            
+          </view>
+        </navigator>
+      </view>
+</block>
+</block>

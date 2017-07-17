@@ -1,0 +1,24 @@
+<template name="recordlist">
+  <block wx:for-items="{{list}}" wx:for-index="idx" wx:key="{{item.song.id}}" wx:for-item="re">
+    <view class="songs {{re.song.privilege.st>=0?'':'disabled'}}">
+      <navigator hover-class="{{re.song.privilege.st<0?'none':''}}" url="{{re.song.privilege.st>=0?'../playing/index?id='+re.song.id+'&br='+re.song.privilege.maxbr:''}}" bindtap="playmusic" data-idx="{{idx}}" data-st="{{re.song.privilege.st}}">
+        <view class="flexlist flex-center">
+          <view class="flexleft flexnum ">
+            <text class="{{toplist&&idx<3?'topindex':''}}">{{idx+1}}</text>
+          </view>
+          <view class="flexlist">
+            <view class="flexmain">
+              <view>{{re.song.name}}</view>
+              <view class="relistdes">{{re.song.ar[0].name}}-{{re.song.al.name}}</view>
+            </view>
+            <view class="flexact">
+              <view class="fa_list fa_pc">
+                <image src="../../../image/pl-playall.png" width="30" height="30" mode="widthFix" />{{re.playCount}}次
+              </view>
+            </view>
+          </view>
+        </view>
+      </navigator>
+    </view>
+  </block>
+</template>

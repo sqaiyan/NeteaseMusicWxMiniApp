@@ -1,0 +1,56 @@
+<import src="../../../utils/playlist.wxml" />
+<import src="../../../utils/pageplay.wxml" />
+<import src="../../../utils/loading.wxml" />
+<template is="pp" data="{{music:music,playing:playing,playtype:playtype}}" />
+<view id="plist-header">
+	<view class="music_cover blurbg" style="background-image:url({{result.album.picUrl}})" id="plh-filterbg"></view>
+	<view id="plh-main">
+		<view id="plh-cover">
+			<image src="../../../image/a82.png" id="plh-cover-album" mode="aspectFill" />
+			<image class="music_cover" mode="aspectFit" src="{{result.album.picUrl}}?param=200y200" />
+		</view>
+		<view id="plh-cnt">
+			<text id="music_h_name">{{result.album.name||""}}</text>
+			<view data-userid="{{result.album.artist.id}}" bindtap="artlist">
+				歌手：
+				<text>{{result.album.artist.name}}</text>
+			</view>
+			<view>
+				发行时间：
+				<text>{{result.album.publishTime}}</text>
+			</view>
+		</view>
+	</view>
+	<view id="plh_action">
+		<view>
+			<image src="../../../image/cm2_list_detail_icn_fav_new@2x.png" wx:if="{{!list.album.info.liked}}" />
+			<image src="../../../image/cm2_list_detail_icn_faved@2x.png" wx:if="{{list.album.info.liked}}" />
+			<text>{{'收藏'}}</text>
+		</view>
+		<view>
+			<navigator url="../recommend/index?id={{result.album.info.threadId}}&from=playlist">
+				<image src="../../../image/cm2_list_detail_icn_cmt@2x.png" />
+				<text>{{result.album.info.commentCount||'评论'}}</text>
+			</navigator>
+		</view>
+		<view>
+			<image src="../../../image/cm2_list_detail_icn_share@2x.png" />
+			<text>{{result.album.info.shareCount||'分享'}}</text>
+		</view>
+	</view>
+</view>
+<view class="plist-detail page_pp">
+	<block wx:if="{{result.songs.length}}">
+		<view id="playall" bindtap="playall" class="flexlist flex-center">
+			<view class="flexleft flexnum">
+				<image src="../../../image/pl-playall.png" mode="widthFix" />
+			</view>
+			<view class="flexlist">
+				<text id="pa-count">播放全部 <text> (共{{result.songs.length}}首)</text>
+				</text>
+			</view>
+		</view>
+		<template is="playlist" data="{{list:result.songs,curplay:curplay}}" />
+	</block>
+	<template is="loading" wx:else></template>
+</view>

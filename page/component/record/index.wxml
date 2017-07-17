@@ -1,0 +1,36 @@
+<import src="../../../utils/recordlist.wxml" />
+<view id="header" class="tab">
+  <view class="tab-item  {{tab==1?'tbi-cur':''}}" bindtap="switchtab" data-t="1">
+    <text class="tbi-text">最近一周</text>
+  </view>
+  <view class="tab-item  {{tab==0?'tbi-cur':''}}" bindtap="switchtab" data-t="0">
+    <text class="tbi-text">所有时间</text>
+  </view>
+</view>
+<block wx:if="{{loading}}">
+  <view class="tab_cnt" hidden="{{tab==0}}">
+    <block wx:if="{{weekData.code!=200}}">
+      <view class="cntloading">{{weekData.msg}}1</view>
+    </block>
+    <block wx:else>
+      <template is="recordlist" data="{{list:weekData.weekData}}" />
+    </block>
+  </view>
+  <view class="tab_cnt" hidden="{{tab==1}}">
+    <block wx:if="{{allData.code!=200}}">
+      <view class="cntloading">{{weekData.msg}}2</view>
+    </block>
+    <block wx:else>
+      <template is="recordlist" data="{{list:allData.allData}}" />
+    </block>
+  </view>
+</block>
+<block wx:else>
+  <view class="cntloading">加载中...
+    <view>
+      <text class="cl1"></text>
+      <text class="cl2"></text>
+      <text class="cl3"></text>
+    </view>
+  </view>
+</block>

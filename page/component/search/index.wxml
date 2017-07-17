@@ -1,0 +1,162 @@
+<import src="../../../utils/playlist.wxml" />
+<import src="../../../utils/loading.wxml" />
+<view id="search_header">
+  
+  <view id="search_input">
+    <form bindsubmit="searhFinput">
+      <view class="form">
+        <view class="form_input">
+          <view>
+            <icon type="search" size="16" color="#aaa" />
+          </view>
+          <input type="text" auto-focus maxlength="20" name="name" bindinput="inputext" placeholder="搜索单曲、歌手、专辑等" value="{{value}}" />
+          <view class="sf_clear" hidden="{{!value}}" bindtap="clear_kw">
+            <icon type="clear" size="16" color="#aaa" />
+          </view>
+        </view>
+        <view class="button">
+          <button form-type="submit" plain="true">
+            搜索
+          </button>
+        </view>
+      </view>
+    </form>
+  </view>
+  <view id="search_tab" class="{{!loading||!value?'vhidden':''}} tab">
+    <view class="tab-item {{tab.tab==item.type?'tbi-cur':''}}" wx:for-items="{{tabs}}" wx:key="{{item.type}}" wx:for-index="idx" catchtap="tabtype" data-index="{{idx}}" data-tab="{{item.type}}">
+      <text class="tbi-text">{{item.name}}</text>
+    </view>
+  </view>
+</view>
+<view id="search_result">
+  <view class="seare_list" id="re_search_wrap" wx:if="{{!loading||!value}}">
+    <view id="search_recent" wx:if="{{recent.length}}">
+      <view id="search_hot"></view>
+      <text class="sm_title">历史搜索</text>
+      <view class="sr_lists flexlist flex-center" bindtap="searhFrecent" wx:for="{{recent}}" wx:if="{{idx<5}}" data-value="{{item}}" wx:for-index="idx">
+        <view class="flexnum">
+          <icon type="waiting_circle" size="22" color="#ddd"></icon>
+        </view>
+        <view class="flexlist">
+          <view class="flexmain">
+            <view>{{item}}</view>
+          </view>
+          <view class="flexact" catchtap="del_research" data-index="{{idx}}">
+            <image src="../../../image/cm2_playlist_icn_dlt@2x.png" />
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="seare_list" hidden="{{tab.tab!=item.type||!loading||!value}}" wx:for-items="{{tabs}}" wx:index="idx">
+      <template is="playlist" data="{{list:item.relist.songs}}" />
+      <view wx:for="{{item.relist.artists}}" class="artists " wx:for-item="re" wx:key="{{re}}">
+        <navigator url="../artist/index?id={{re.id}}" class="flexlist flex-image">
+          <view class="flexleft fl-image">
+            <image src="{{re.img1v1Url}}?param=100y100" class="user_avator" />
+          </view>
+          <view class="flexlist">
+            <view class="flexmain">
+              <view>{{re.name}}
+                <text class="fm_tdes" wx:if="{{re.alias[0]}}">({{re.alias[0]}})</text>
+              </view>
+            </view>
+          </view>
+        </navigator>
+      </view>
+      <view wx:for="{{item.relist.albums}}" class="albums" wx:for-item="re" wx:key="{{re}}">
+        <navigator url="../album/index?pid={{re.id}}&from=album" class="flexlist flex-image">
+          <view class="flexleft fl-image">
+            <image src="{{re.picUrl}}?param=100y100" class="album_cover" />
+            <image class="albums_cover" src="../../../image/a6l.png" />
+          </view>
+          <view class="flexlist">
+            <view class="flexmain">
+              <view>{{re.name}}
+                <text wx:if="{{re.alias[0]}}">({{re.alias[0]}})</text>
+              </view>
+              <view class="relistdes">{{re.artist.name}}
+                <text wx:if="{{re.artist.alias[re.artist.alias.length-1]}}">({{re.artist.alias[re.artist.alias.length-1]}})</text>
+              </view>
+            </view>
+          </view>
+        </navigator>
+      </view>
+      <view wx:for="{{item.relist.playlists}}" class="playlist" wx:for-item="re" wx:key="{{re}}">
+        <navigator url="../playlist/index?pid={{re.id}}" class="flexlist  flex-image">
+          <view class="flexleft fl-image">
+            <image src="{{re.coverImgUrl}}?param=100y100" class="album_cover" />
+          </view>
+          <view class="flexlist">
+            <view class="flexmain">
+              <view>{{re.name}}</view>
+              <view class="relistdes">{{re.trackCount}}首，By{{re.creator.nickname}}，播放{{re.playCount}}次</view>
+            </view>
+          </view>
+        </navigator>
+      </view>
+      <view class="flex-boxlist mvs flex-two" wx:if="{{item.relist.mvs}}">
+        <navigator url="../mv/index?id={{re.id}}" wx:for="{{item.relist.mvs}}" class="tl_cnt" wx:for-item="re" wx:key="{{re}}">
+          <view class="cover">
+            <view class="img_playcount">
+              <image src="../../../image/video.png" style="height:20rpx;width:28rpx;" />{{re.playCount}}</view>
+            <image src="{{re.cover}}?param=320y180" class="mv_cover" />
+          </view>
+          <view class="tl_info">
+            <view>{{re.name}}</view>
+            <view class="tli_des">{{re.artistName}}</view>
+          </view>
+        </navigator>
+      </view>
+      <view class="sm_title" wx:if="{{item.type==1009&&item.relist.djRadios.length}}">电台</view>
+      <navigator url="../djradio/index?id={{re.id}}" class="flexlist flex-image" wx:for="{{item.relist.djRadios}}" wx:for-item="re" wx:key="{{re}}">
+        <view class="flexleft fl-image">
+          <image src="{{re.picUrl}}?param=100y100" class="album_cover" />
+        </view>
+        <view class="flexlist">
+          <view class="flexmain">
+            <view>{{re.name}}</view>
+            <view class="relistdes">{{re.dj.nickname}}</view>
+          </view>
+        </view>
+      </navigator>
+      <view class="sm_title" wx:if="{{item.type==1009&&item.relist.djprograms.length}}">节目</view>
+      <navigator url="../program/index?id={{re.mainSong.id}}&pid={{re.id}}" class="flexlist flex-image" wx:for="{{item.relist.djprograms}}" wx:for-item="re" wx:key="{{re}}">
+        <view class="flexleft fl-image">
+          <image src="{{re.coverUrl}}?param=100y100" class="album_cover" />
+        </view>
+        <view class="flexlist">
+          <view class="flexmain">
+            <view>{{re.name}}</view>
+            <view class="relistdes">{{re.dj.brand}} {{'Vol.'+re.serialNum}}</view>
+          </view>
+        </view>
+      </navigator>
+      <view wx:for="{{item.relist.userprofiles}}" class=" userprofiles" wx:for-item="re" wx:key="{{re}}">
+        <navigator url="../user/index?id={{re.userId}}" class="flexlist flex-image">
+          <view class="flexleft fl-image">
+            <image src="{{re.avatarUrl}}?param=100y100" class="user_avator" />
+          </view>
+          <view class="flexlist">
+            <view class="flexmain">
+              <view>{{re.nickname}}
+                <image src="../../../image/cm2_pro_icn_boy@2x.png" wx:if="{{re.gender==1}}" />
+                <image src="../../../image/cm2_pro_icn_girl@2x.png" wx:if="{{re.gender!=1}}" />
+              </view>
+              <view class="relistdes">{{re.signature}}</view>
+            </view>
+          </view>
+        </navigator>
+      </view>
+      <view wx:if="{{item.loading}}">
+        <view class="cntloading" wx:if="{{'1'==item.type&&!item.relist.songs.length}}">暂无结果</view>
+        <view class="cntloading" wx:if="{{'100'==item.type&&!item.relist.artists.length}}">暂无结果</view>
+        <view class="cntloading" wx:if="{{'10'==item.type&&!item.relist.albums.length}}">暂无结果</view>
+        <view class="cntloading" wx:if="{{'1000'==item.type&&!item.relist.playlists.length}}">暂无结果</view>
+        <view class="cntloading" wx:if="{{'1004'==item.type&&!item.relist.mvs.length}}">暂无结果</view>
+        <view class="cntloading" wx:if="{{'1009'==item.type&&!item.relist.djprograms.length}}">暂无结果</view>
+        <view class="cntloading" wx:if="{{'1002'==item.type&&!item.relist.userprofiles.length}}">暂无结果</view>
+      </view>
+      <template is="loading" wx:if="{{!item.loading||!item.none}}" />
+  </view>
+</view>

@@ -1,0 +1,4 @@
+#recs_header{position: relative}
+#recs_header image{width:100%;vertical-align: top}
+#date{position: absolute;left: 60rpx;top:50%;text-align: center;font-size: 50rpx;width: 110rpx;transform: translateY(-50%);}
+#date text{position: absolute;top: 50%; transform: translateY(-50%);width: 100%;color: #BB2C08}

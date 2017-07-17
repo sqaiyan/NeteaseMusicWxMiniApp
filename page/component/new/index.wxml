@@ -1,0 +1,85 @@
+<import name="image" src="../../../utils/image.wxml" />
+<import name="loading" src="../../../utils/loading.wxml" />
+<view class="ptab">
+  <view bindtap="ptab" data-pt="1" class="pt-item {{pt==1?'pt_cur':''}}">新歌</view>
+  <view bindtap="ptab" data-pt="2" class="pt-item  {{pt==2?'pt_cur':''}}">新碟</view>
+</view>
+
+  <scroll-view id="res_wrap" bindscrolltolower="loadmore" scroll-y="true" style="height:100%">
+    <view class="ptab_cnt" hidden="{{pt!=1}}">
+      <view id="search_tab" class="tab">
+        <view class="tab-item {{tab==1?'tbi-cur':''}}" catchtap="tabtype" data-tab="1">
+          <text class="tbi-text">华语</text>
+        </view>
+        <view class="tab-item {{tab==2?'tbi-cur':''}}" catchtap="tabtype" data-tab="2">
+          <text class="tbi-text">欧美</text>
+        </view>
+        <view class="tab-item {{tab==3?'tbi-cur':''}}" catchtap="tabtype" data-tab="3">
+          <text class="tbi-text">韩国</text>
+        </view>
+        <view class="tab-item {{tab==4?'tbi-cur':''}}" catchtap="tabtype" data-tab="4">
+          <text class="tbi-text">日本</text>
+        </view>
+      </view>
+
+      <!-- -->
+      <view class="tab_cnt" wx:for="{{songs}}" wx:for-item="re" wx:key="" wx:for-index="idx" hidden="{{tab!=(idx+1)}}">
+        <image src="../../../image/cm2_discover_banner_{{re.img}}-ip6@2x.jpg" style="width:750rpx;height:302rpx"></image>
+        <navigator url="../playing/index?id={{r.id}}" class="flexlist flex-center {{r.id==music.id?'cur':''}}" data-index="{{i}}" wx:for-index="i" wx:for="{{re.re.data.data}}" wx:key="{{r.id}}" wx:for-item="r">
+          <view class="flexlist">
+            <view class="flexleft fl-image">
+              <template is="image" data="{{src:(r.album.picUrl+'param=100y100'),width:80,class:'album_cover'}}" />
+            </view>
+            <view class="flexmain">
+              <view>{{r.name}}
+              </view>
+              <view class="relistdes">{{r.artists[0].name}}</view>
+            </view>
+            <view class="flexact">
+              <view catchtap="mv" data-mvid="{{r.mvid}}" wx:if="{{r.mvid}}" class="fa_list fa_mv">
+                <navigator url="../mv/index?id={{r.mvid}}">
+                  <image src="../../../image/l0.png" mode="widthFix" />
+                </navigator>
+              </view>
+            </view>
+          </view>
+        </navigator>
+        <template is="loading" wx:if="{{re.loading}}" />
+      </view>
+    </view>
+    <view class="ptab_cnt" hidden="{{pt!=2}}">
+      <view id="search_tab" class="tab">
+        <view class="tab-item {{tab2==1?'tbi-cur':''}}" catchtap="tabtype" data-tab="1">
+          <text class="tbi-text">华语</text>
+        </view>
+        <view class="tab-item {{tab2==2?'tbi-cur':''}}" catchtap="tabtype" data-tab="2">
+          <text class="tbi-text">欧美</text>
+        </view>
+        <view class="tab-item {{tab2==3?'tbi-cur':''}}" catchtap="tabtype" data-tab="3">
+          <text class="tbi-text">韩国</text>
+        </view>
+        <view class="tab-item {{tab2==4?'tbi-cur':''}}" catchtap="tabtype" data-tab="4">
+          <text class="tbi-text">日本</text>
+        </view>
+      </view>
+      <view class="tab_cnt" wx:for="{{albums}}" wx:for-item="re" wx:key="" wx:for-index="idx" hidden="{{tab2!=(idx+1)}}">
+        <view class='flex-boxlist album flex-two'>
+          <view wx:for="{{re.re.data.albums}}" class="tl_cnt" wx:for-item="r" wx:key="{{r.id}}">
+            <navigator url="../album/index?pid={{r.id}}">
+              <view class="albums_wrap cover">
+                <template is="image" data="{{src:'../../../image/a82.png',class:'def_cover '}}" />
+                <template is="image" data="{{src:(r.picUrl+'?param=320y320'),class:'al-image album_cover'}}" />
+              </view>
+              <view class="tl_info">
+                <view>{{r.name}}</view>
+                <view class="tli_des">
+                  <block wx:for-item="a" wx:for="{{r.artists}}">{{a.name}} </block>
+                </view>
+              </view>
+            </navigator>
+          </view>
+        </view>
+        <template is="loading" wx:if="{{re.loading}}" />
+      </view>
+    </view>
+  </scroll-view>

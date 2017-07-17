@@ -1,0 +1,49 @@
+<import src="../../../utils/pl.wxml" />
+<import src="../../../utils/loading.wxml" />
+<view class="index">
+  <view id="user" style="background-image:url({{user.profile.backgroundUrl}})">
+    <view id="user_info">
+      <image id="user_ava" class="user_avator" src="{{user.profile.avatarUrl}}?param=100y100" />
+      <text id="user_nn">{{user.profile.nickname}}</text>
+      <image src="../../../image/cm2_pro_icn_boy@2x.png" id="usergender" wx:if="{{user.profile.gender==1}}" />
+      <image src="../../../image/cm2_pro_icn_girl@2x.png" id="usergender" wx:if="{{user.profile.gender==2}}" />
+      <view id="user_sig">{{user.profile.signature}}</view>
+    </view>
+    <view class="tab">
+      <view class="tab-item">
+        <navigator url="">
+          <text>{{user.profile.eventCount}}</text>动态 </navigator>
+      </view>
+      <view class="tab-item">
+        <navigator url="../follow/index?uid={{user.profile.userId}}&f=follows">
+          <text>{{user.profile.follows}}</text>关注</navigator>
+      </view>
+      <view class="tab-item">
+        <navigator url="../follow/index?uid={{user.profile.userId}}&f=follweds">
+          <text>{{user.profile.followeds}}</text>粉丝</navigator>
+      </view>
+    </view>
+  </view>
+  <view class="playlist" wx:if="{{!loading}}">
+    <text class="sm_title">{{user.profile.nickname}}创建的歌单<text>({{user.profile.playlistCount}})</text> <text class='fr'>共被收藏{{user.profile.playlistBeSubscribedCount}}次</text>
+    </text>
+    <navigator url="../record/index?uid={{user.profile.userId}}">
+      <view class="flexlist flex-image">
+        <view class="flexleft fl-image">
+          <image src="../../../image/cm2_list_cover_rank@2x.png" class="music_cover" />
+        </view>
+        <view class="flexlist">
+          <view class="flexmain">
+            <view>听歌排行</view>
+            <view class="relistdes">累计收听{{user.listenSongs}}首</view>
+          </view>
+        </view>
+      </view>
+    </navigator>
+    <template is="pl" data="{{list:list1}}" />
+    <view class="sm_title" hidden="{{!list2.length}}">{{user.profile.nickname}}收藏的歌单 <text>({{list2.length}})</text>
+    </view>
+    <template is="pl" data="{{list:list2}}" />
+  </view>
+  <template is="loading" wx:else />
+</view>

@@ -1,0 +1,42 @@
+<import src="image.wxml" />
+<template name="pp_music">
+  <view class="pp_overlay" bindtap="togminfo" hidden="{{!show}}"></view>
+  <view class="pp_main" hidden="{{!show}}">
+    <view class='ppm_header'>{{music.name}}</view>
+    <view class='ppm_content'>
+      <view class="menu">
+        <view class="mn_list" bindtap="togainfo">
+          <view class="mn_ico">
+          <template is="image" data="{{src:'../../../image/cm2_lay_icn_fav_new@2x.png',width:56}}"/>
+          </view>
+          <view class="cmain">收藏到歌单</view>
+        </view>
+        <navigator url="../simi/index?id={{music.id}}"  class="mn_list">
+          <view class="mn_ico">
+          <template is="image" data="{{src:'../../../image/cm2_lay_icn_similar_new@2x.png',width:56}}"/>
+          </view>
+          <view class="cmain">相似推荐</view>
+        </navigator>
+        <navigator url="../artist/index?id={{music.ar[0].id||music.artists[0].id}}" class="mn_list">
+          <view class="mn_ico">
+          <template is="image" data="{{src:'../../../image/cm2_lay_icn_artist_new@2x.png',width:56}}"/>
+          </view>
+          <view class="cmain">歌手：{{music.ar[0].name||music.artists[0].name}}</view>
+        </navigator>
+        <navigator url="../album/index?pid={{music.al.id||music.album.id}}" class="mn_list">
+          <view class="mn_ico">
+          <template is="image" data="{{src:'../../../image/cm2_lay_order_album_new@2x.png',width:56}}"/>
+          </view>
+          <view class="cmain">专辑：{{music.al.name||music.album.name}}</view>
+        </navigator>
+        <navigator url="../mv/index?id={{music.mv||music.mvid}}" wx:if="{{music.mv||music.mvid}}" class="mn_list">
+          <view class="mn_ico">
+          <template is="image" data="{{src:'../../../image/cm2_lay_icn_mv_new@2x.png',width:56}}"/>
+          </view>
+          <view class="cmain">查看Mv</view>
+        </navigator>
+      </view>
+    </view>
+    <view class='ppm_footer' wx:if="{{close}}" bindtap="togminfo">关闭</view>
+  </view>
+</template>

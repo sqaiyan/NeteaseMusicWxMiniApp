@@ -1,0 +1,66 @@
+<import src="../../../utils/playlist.wxml" />
+<import src="../../../utils/pageplay.wxml" />
+<template is="pp" data="{{music:music,playing:playing,playtype:playtype}}"/>
+  <view id="plist-header">
+    <view class="blurbg" style="background-image:url({{cover}})" id="plh-filterbg"></view>
+    <view id="plh-main">
+      <view id="plh-cover">
+        <image class="music_cover" src="{{cover}}" />
+        <view class="img_playcount">
+          <image src="../../../image/p0.png" style="width:24rpx;height:24rpx;" />{{list.playlist.playCount}}</view>
+        <view id="plh-playinfo" bindtap="plinfo">
+          <image src="../../../image/cm2_list_detail_icn_infor@2x.png" />
+        </view>
+      </view>
+      <view id="plh-cnt">
+        <text id="music_h_name">{{list.playlist.name||" "}}</text>
+        <view data-userid="{{list.playlist.creator.userId}}" wx:if="{{list}}" bindtap="userplaylist">
+          <image id="user_ava" class="user_avator" src="{{list.playlist.creator.avatarUrl}}" />
+          <text>{{list.playlist.creator.nickname||" "}} </text>
+          <image src="../../../image/cm2_list_detail_icn_arr@2x.png" style="width:16rpx;height:24rpx;" />
+        </view>
+      </view>
+    </view>
+    <view id="plh_action">
+      <view>
+        <image src="../../../image/cm2_list_detail_icn_fav_new@2x.png" wx:if="{{!list.playlist.subscribed&&user.profile.userId!=list.playlist.creator.userId}}" />
+        <image src="../../../image/cm2_list_detail_icn_faved@2x.png" wx:if="{{list.playlist.subscribed||user.profile.userId==list.playlist.creator.userId}}" />
+        <text>{{list.playlist.subscribedCount||'收藏'}}</text>
+      </view>
+      <view>
+        <navigator url="../recommend/index?id={{list.playlist.commentThreadId}}&from=playlist">
+          <image src="../../../image/cm2_list_detail_icn_cmt@2x.png" />
+          <text>{{list.playlist.commentCount||'评论'}}</text>
+        </navigator>
+      </view>
+      <view>
+        <image src="../../../image/cm2_list_detail_icn_share@2x.png" />
+        <text>{{list.playlist.shareCount||'分享'}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="plist-detail page_pp">
+    <block wx:if="{{list.playlist.tracks.length}}">
+      <view id="playall" bindtap="playall" class="flexlist flex-center">
+        <view class="flexleft flexnum">
+          <image src="../../../image/pl-playall.png" mode="widthFix" />
+        </view>
+        <view class="flexlist">
+          <text id="pa-count">播放全部 <text> (共{{list.playlist.trackCount}}首)</text>
+          </text>
+        </view>
+      </view>
+      
+       <template is="playlist" data="{{list:list.playlist.tracks,privileges:list.privileges,curplay:curplay}}" />
+
+    </block>
+    <block wx:if="{{!list.playlist.tracks.length}}">
+      <view class="cntloading">加载中...
+        <view>
+          <text class="cl1"></text>
+          <text class="cl2"></text>
+          <text class="cl3"></text>
+        </view>
+      </view>
+    </block>
+  </view>

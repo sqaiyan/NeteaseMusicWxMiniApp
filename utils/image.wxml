@@ -1,0 +1,3 @@
+<template name="image">
+  <image src="{{src}}" width="{{width}}rpx" mode="aspectFit"  class="{{class}}" height="{{height||width}}rpx" style="width:{{width}}rpx;height:{{height||width}}rpx"></image>
+</template>

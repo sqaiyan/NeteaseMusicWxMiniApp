@@ -1,0 +1,65 @@
+<import src="../../../utils/commentslist.wxml" />
+<view id="mvpage">
+  <view id="mvheader">
+    <video id="mvideo" src="{{src}}" autoplay="{{wifi}}"></video>
+  </view>
+  <view class="tab">
+    <view class="tab-item {{tab==0?'tbi-cur':''}}" bindtap="tab" data-tab="0">
+      <text class="tbi-text">详情</text>
+    </view>
+    <view class="tab-item {{tab==1?'tbi-cur':''}}" data-tab="1" bindtap="tab">
+      <text class="tbi-text">评论 <text class="tbi-des">{{main.commentCount}}</text>
+      </text>
+    </view>
+    <view class="tab-item {{tab==2?'tbi-cur':''}}" data-tab="2" bindtap="tab">
+      <text class="tbi-text">相关Mv</text>
+    </view>
+  </view>
+  <view wx:if="{{loading}}" class="cntloading">加载中...
+    <view>
+      <text class="cl1"></text>
+      <text class="cl2"></text>
+      <text class="cl3"></text>
+    </view>
+  </view>
+  <view id="mvmain">
+    <view class="tab-cnt" id="mv-detail" wx:if="{{tab==0}}">
+      <view id="mvinfo">
+        <text id="mvname">{{main.name}}</text>
+        <view>
+          <navigator url="../artist/index?id={{main.artistId}}"> 歌手：{{main.artistName}}</navigator>
+        </view>
+        <view>播放：{{main.playCount}}</view>
+      </view>
+      <view id="mvdes">
+        <view class="fc_gray">发行：{{main.publishTime}}</view>
+        <view>{{main.briefDesc}}</view>
+        <view>{{main.desc}}</view>
+      </view>
+    </view>
+    <view class="tab-cnt" wx:if="{{tab==1}}">
+      <scroll-view id="mv-comment" bindscrolltolower="loadmore" style="height:100%;" scroll-y="true" lower-threshold="20">
+        <template is="commentslist" data="{{rec:rec,loading:loading2}}" />
+      </scroll-view>
+    </view>
+    <view class="tab-cnt" wx:if="{{tab==2}}">
+      <scroll-view style="height:100%;" scroll-y="true">
+        <view class="flex-boxlist mvs">
+          <view wx:for="{{simi.mvs}}" class="tl_cnt" wx:for-item="re" wx:key="{{re}}">
+            <navigator url="../mv/index?id={{re.id}}">
+              <view class="cover">
+                <view class="img_playcount">
+                  <image src="../../../image/video.png" style="height:20rpx;width:28rpx;" />{{re.playCount}}</view>
+                <image src="{{re.cover}}?param=320y180" class="mv_cover" />
+              </view>
+              <view class="tl_info">
+                <view>{{re.name}}</view>
+                <view class="tli_des">{{re.artistName}}</view>
+              </view>
+            </navigator>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

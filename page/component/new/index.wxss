@@ -1,0 +1,4 @@
+page{display: flex;flex-flow: column;align-content: stretch}
+.ptab{flex: 0 0 56rpx;}
+#res_wrap{flex:1;overflow: hidden}
+#res_wrap scroll-view{height: 100%;}

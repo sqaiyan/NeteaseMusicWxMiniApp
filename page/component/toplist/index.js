@@ -1,0 +1,9 @@
+
+Page({
+    data:{
+       
+    },
+    onLoad:function(){
+
+    }
+})

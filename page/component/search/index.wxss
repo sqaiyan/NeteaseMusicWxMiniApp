@@ -1,0 +1,27 @@
+page{}
+#search_input{padding: 0 0 20rpx 20rpx;background-color: #BB2C08;overflow: hidden;height: 60rpx;flex:0 0 60rpx;color: #fff}
+#search_input .form{display: flex;}
+.form_input{flex: 1;position: relative;color: #fff;height: 60rpx;overflow: hidden}
+.form_input view{position: absolute;top: 0;z-index: 10;left: 0;padding:12rpx 15rpx  }
+.form_input .sf_clear{right: 0;left: auto}
+#search_input input{border:none;color: #515151;background-color: #ececec;
+border-radius:4rpx;font-size: 28rpx;padding: 0 60rpx;box-sizing: border-box;height: 60rpx;line-height:60rpx;display: block;}
+
+.button button{padding: 0 20rpx;height:60rpx;border: none;line-height: 60rpx;display:block;text-align: right;font-size: 30rpx;color: #fff}
+
+#search_result{height:100%;padding-top:161rpx; box-sizing: border-box;}
+#search_header{position: fixed;top:0;left: 0;width: 100%;z-index: 10;}
+#search_tab{overflow-x: auto;-webkit-backdrop-filter: blur(15px);backdrop-filter: blur(15px);}
+#search_hot{padding: 60rpx 0;min-height: 100rpx;}
+.tab .tab-item{flex: 0 0 160rpx;} 
+.vhidden{visibility:hidden;}
+
+
+.sm_title{font-size: 28rpx;margin: 0}
+#re_search_wrap{display: flex; flex-direction: column; justify-content: flex-end; }
+.sr_lists icon{ vertical-align:top;}
+.sr_lists image{width: 60rpx;height: 60rpx; vertical-align:top}
+
+.search_relist{height: 100%;padding-top: 161rpx;box-sizing:  border-box}
+.seare_list{height: 100%;}
+.seare_list scroll-view{height: 100%;}

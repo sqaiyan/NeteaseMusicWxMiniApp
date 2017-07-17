@@ -1,0 +1,28 @@
+<template name="pp">
+  <view id="pageplay" wx:if="{{music.id}}">
+    <view id="pp_pic" bindtap="toggleplay">
+      <image class="music_cover" src="{{music.al.picUrl||music.album.picUrl}}?param=60y60"></image>
+      <image id='pa-pause' src="../../../image/ajf.png" id="pp_playing" wx:if="{{!playing}}"/>
+    </view>
+    <view id='pp_name'>
+      <navigator url="{{!music.name?'':'../'+(playtype==1?'playing':(playtype==2?'fm':'program'))+'/index?id='+music.id}}">
+        <view>{{music.name||'暂无播放'}}</view>
+        <view id='ppn_des' wx:if="{{music.name}}">{{music.ar[0].name||music.artists[0].name}} -《{{music.al.name||music.album.name}}》</view>
+      </navigator>
+    </view>
+    <view id='pp_action'>
+      <view class="pa-baction" bindtap="playnext" data-pt="-1" wx:if="{{playtype!=2}}">
+        <image src="../../../image/ajh.png" id="pp_next" style="width:60rpx;height:60rpx;" />
+      </view>
+      <view class="pa-baction" wx:if="{{playtype!=3}}" hidden="{{music.st||music.starred}}" bindtap="lovesong" data-p="{{playing}}">
+        <image id='pa-playing' src="../../../image/cm2_play_icn_love@2x.png" style="width:80rpx;height:80rpx;" />
+      </view>
+      <view class="pa-baction" wx:if="{{playtype!=3}}" hidden="{{!music.st&&!music.starred}}" bindtap="lovesong" data-p="{{playing}}">
+        <image src="../../../image/cm2_play_icn_loved@2x.png" style="width:80rpx;height:80rpx;" />
+      </view>
+      <view class="pa-baction" bindtap="playnext" data-pt="1">
+        <image src="../../../image/ajb.png" id="pp_next" style="width:60rpx;height:60rpx;" />
+      </view>
+    </view>
+  </view>
+</template>

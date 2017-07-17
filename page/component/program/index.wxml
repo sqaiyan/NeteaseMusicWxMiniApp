@@ -1,0 +1,151 @@
+<import src="../../../utils/playpercent.wxml" />
+<import src="../../../utils/image.wxml" />
+<import src="../../../utils/pp_music.wxml" />
+<view id="playingpage" class=" {{playing?'playing':''}}">
+  <image src="../../../image/cm2_default_play_bg-ip6@2x.jpg" id="coverbg" style="z-index:-2" />
+  <image id="playing-bg" class="blurbg" mode="aspectFill" src="{{p.mainSong.album.picUrl}}?param=750y750" />
+  <view hidden="{{tgpinfo}}">
+    <image src="../../../image/cm2_play_disc_radio-ip6@2x.png" id="coverbg" />
+  </view>
+  <view class="flexlist flex-center" id="program_radio_info" hidden="{{tgpinfo}}">
+    <image class="flexleft flexnum " id="radio_cover" src="{{p.radio.picUrl}}" />
+    <view class="flexlist">
+      <view class="flexmain">
+        <view>{{p.radio.name}}</view>
+        <view class="relistdes">{{p.radio.subCount}}人订阅</view>
+      </view>
+      <view class="flexact">
+        <view class="fa_list">
+          <template is="image" wx:if="{{!p.subscribed}}" data="{{src:'../../../image/cm2_list_icn_subscribe@2x.png',width:24}}" />
+          <template is="image" wx:if="{{p.subscribed}}" data="{{src:'../../../image/cm2_list_icn_subscribe@2x.png',width:24}}" /> <block wx:if="{{p.subscribed}}">已</block>订阅
+        </view>
+      </view>
+    </view>
+  </view>
+  <view id="playing-main" hidden="{{tgpinfo}}" bindtap="toggleinfo">
+    <image id="playingmainbg" src="../../../image/play.png" />
+    <image src="{{p.mainSong.album.picUrl}}?param=400y400" bindtap="loadlrc" id="pmaincover" />
+  </view>
+
+  <!-- -->
+  <scroll-view class="menu" scroll-y="true" id="p_info_menu" bindtap="toggleinfo" hidden="{{!tgpinfo}}">
+    <navigator url="../djradio/index?id={{p.radio.id}}" class="mn_list">
+      <view class="mn_ico">
+        <image src="../../../image/cm2_rdi_icn_name@2x.png"></image>
+      </view>
+      <view class="cmain">{{p.radio.name}}</view>
+      <view class="rdes">
+        <view class="arrow arrow-white"></view>
+      </view>
+    </navigator>
+    <navigator class="mn_list" url="../user/index?id={{p.dj.userId}}">
+      <view class="mn_ico">
+        <image src="../../../image/cm2_rdi_icn_artist@2x.png"></image>
+      </view>
+      <view class="cmain">{{p.dj.nickname}}</view>
+      <view class="rdes">
+        <view class="arrow arrow-white"></view>
+      </view>
+    </navigator>
+    <view class="mn_list" wx:if="{{p.songs.length}}">
+      <view class="mn_ico">
+        <image src="../../../image/cm2_rdi_icn_list@2x.png"></image>
+      </view>
+      <view class="cmain">包含的歌曲</view>
+      <view class="rdes">
+        <text>{{p.songs.length}}</text>
+        <view class="arrow arrow-white"></view>
+      </view>
+    </view>
+    <view id="p_info">
+      <view>
+        <text class="tags">{{p.radio.category}}</text>{{p.name}}Vol.{{p.serialNum}}</view>
+      <view id="p_info_time">{{createTime}}创建 播放：{{p.listenerCount}}次</view>
+      <text>{{p.description}}</text>
+    </view>
+  </scroll-view>
+
+  <!-- -->
+  <view id="playing-actwrap">
+    <view id="playing-info" wx:if="{{!tgpinfo}}">
+      <view class="pi-act commentscount" bindtap="songheart">
+        <image src="../../../image/cm2_play_icn_praise@2x.png" wx:if="{{!p.liked}}" />
+        <image src="../../../image/cm2_play_icn_yizan@2x.png" wx:if="{{p.liked}}" />
+        <text>{{p.likedCount}}</text>
+      </view>
+      <view class="pi-act" bindtap="downmusic">
+        <image src="../../../image/cm2_play_icn_dld@2x.png" />
+      </view>
+      <view class="pi-act commentscount">
+        <navigator url="../recommend/index?id={{p.commentThreadId}}">
+          <image wx:if="{{!commentscount}}" src="../../../image/cm2_play_icn_cmt@2x.png" />
+          <image wx:if="{{commentscount}}" src="../../../image/cm2_play_icn_cmt_num@2x.png" />
+          <text wx:if="{{commentscount}}">{{commentscount>999?'999+':commentscount}}</text>
+        </navigator>
+      </view>
+    </view>
+    <template is="playingpercent" data="{{playtime:playtime,percent:percent,duration:duration,downloadPercent:downloadPercent}}" />
+    <view id="playingaction">
+      <view class="pa-saction" bindtap="playshuffle" hidden="{{shuffle!=1}}">
+        <image src="../../../image/cm2_icn_order@2x.png" />
+      </view>
+      <view class="pa-saction" bindtap="playshuffle" hidden="{{shuffle!=2}}">
+        <image src="../../../image/cm2_icn_one@2x.png" />
+      </view>
+      <view class="pa-saction" bindtap="playshuffle" hidden="{{shuffle!=3}}">
+        <image src="../../../image/cm2_icn_shuffle@2x.png" />
+      </view>
+      <view class="pa-maction" data-other="-1" bindtap="playother">
+        <image src="../../../image/ajh.png" />
+      </view>
+      <view class="pa-baction" hidden="{{!playing}}" bindtap="playingtoggle" data-p="{{playing}}">
+        <image id='pa-playing' src="../../../image/ajd.png" />
+      </view>
+      <view class="pa-baction" hidden="{{playing}}" bindtap="playingtoggle" data-p="{{playing}}">
+        <image id='pa-pause' src="../../../image/ajf.png" />
+      </view>
+      <view class="pa-maction" data-other="1" bindtap="playother">
+        <image src="../../../image/ajb.png" />
+      </view>
+      <view class="pa-saction" bindtap="togpinfo">
+        <image src="../../../image/cm2_icn_list@2x.png" />
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<!-- 播放列表 -->
+<view class="pp_overlay" hidden="{{!showpinfo}}" bindtap="togpinfo"></view>
+<view class="pp_main" hidden="{{!showpinfo}}">
+  <view class='ppm_header'>
+    <view bindtap="playshuffle" class="pph_cnt">
+      {{(shuffle==1?'顺序播放':(shuffle==2?'单曲循环':'随机播放'))}}（{{curpl.length}}）
+    </view>
+    <view class="pph_cnt">
+      <view bindtap="del_all">
+        <template is="image" data="{{src:'../../../image/cm2_btmlay_btn_dlt_dis@2x.png',width:40}}" /> 清空
+      </view>
+    </view>
+  </view>
+  <view class='ppm_content'>
+    <scroll-view scroll-y="true">
+      <view class="ml flexlist flex-center {{item.id==p.id?'cur':''}}" bindtap="pospl" data-index="{{idx}}" wx:for-index="idx" wx:for-items="{{curpl}}" wx:key="{{item.id}}">
+        <view class="flexlist">
+          <view class="flexleft" wx:if="{{item.id==p.id}}">
+            <template is="image" data="{{src:'../../../image/aal.png',width:32}}" />
+          </view>
+          <view class="flexmain">
+            <view>{{item.name}} -
+              <text>{{item.dj.nickname}}</text>
+            </view>
+          </view>
+          <view class="flexact" catchtap="del_curpl" data-index="{{idx}}">
+            <template is="image" data="{{src:'../../../image/cm2_playlist_icn_dlt@2x.png',width:60}}" />
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <view class='ppm_footer' bindtap="togpinfo">关闭</view>
+</view>

@@ -1,0 +1,17 @@
+<template name="pl">
+  <block wx:for-items="{{list}}" wx:key="{{item.id}}">
+    <navigator url="../playlist/index?pid={{item.id}}" wx:if="{{item.userId!=user.profile.userId}}">
+      <view class="flexlist flex-image">
+        <view class="flexleft fl-image">
+          <image src="{{item.coverImgUrl}}?param=100y100" class="album_cover" />
+        </view>
+        <view class="flexlist">
+          <view class="flexmain">
+            <view>{{item.name}}</view>
+            <view class="relistdes">{{item.trackCount}}首，播放{{item.playCount}}次</view>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </block>
+  </template>

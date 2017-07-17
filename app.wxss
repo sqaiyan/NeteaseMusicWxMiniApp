@@ -1,0 +1,147 @@
+
+page {
+   background-size: 100% 100%;
+  height: 100%;
+  font-size: 32rpx;
+  font-family:"微软雅黑";
+  color:#333;
+}
+input,textarea,select{font-size: 32rpx;
+  font-family:"微软雅黑";
+  color:#333;}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.page-header {
+  display: flex;
+  font-size: 32rpx;
+  color: #aaa;
+  margin-top: 50rpx;
+  flex-direction: column;
+  align-items: center;
+}
+.page-header-text {
+  padding: 20rpx 40rpx;
+}
+.page-header-line {
+  width: 150rpx;
+  height: 1px;
+  border-bottom: 1px solid #ccc; 
+}
+
+.page-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  overflow-x: hidden;
+}
+
+.green{
+    color: #09BB07;
+}
+.red{
+    color: #F76260;
+}
+.blue{
+    color: #10AEFF;
+}
+.yellow{
+    color: #FFBE00;
+}
+.gray{
+    color: #C9C9C9;
+}
+
+.strong{
+    font-weight: bold;
+}
+
+.bc_green{
+    background-color: #09BB07;
+}
+.bc_red{
+    background-color: #F76260;
+}
+.bc_blue{
+    background-color: #10AEFF;
+}
+.bc_yellow{
+    background-color: #FFBE00;
+}
+.bc_gray{
+    background-color: #C9C9C9;
+}
+
+.tc{
+    text-align: center;
+}
+
+.page input{
+    padding: 20rpx 30rpx;
+    background-color: #fff;
+}
+checkbox, radio{
+    margin-right: 10rpx;
+}
+
+.btn-area{
+    padding: 0 30px;
+}
+.btn-area button{
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
+}
+
+.page {
+    min-height: 100%;
+    flex: 1;
+    
+    overflow: hidden;
+}
+
+.tags{border: 1rpx solid #BB2C08;color: #BB2C08;font-size: 20rpx;line-height: 1;margin-right: 10rpx;padding:3rpx 8rpx;}
+
+.box-txt-e{
+text-overflow: ellipsis;
+display: box;
+box-orient: vertical;
+line-clamp:2;
+overflow: hidden;}
+
+
+#pageplay{position: fixed;width: 100%;display: flex;justify-content: center;bottom: 0;background: rgba(33,33,33,.8);-webkit-backdrop-filter: blur(15px);backdrop-filter: blur(15px);z-index: 100;align-items: center; }
+#pp_pic{flex:0 0 70rpx;text-align: center;border-radius: 50%;padding:15rpx;}
+#pp_playing{background: rgba(0,0,0,.5);position: absolute;left:15rpx;z-index: 2;}
+#pageplay image{width:70rpx;height:70rpx;vertical-align: top}
+#pp_name{flex: 1;overflow: hidden;line-height: 1.6;color: #fff;font-size:28rpx;}
+#pp_name view{height: 1.4em;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;word-break: keep-all}
+#pp_name #ppn_des{font-size: 22rpx;color: #eee;}
+#pp_action{display: flex;align-items: center;padding: 0 5rpx}
+#pp_action .pa-baction{padding: 0 5rpx;flex:0 0 auto}
+#pageplay #pp_next{width: 60rpx;height: 60rpx}
+
+.page_pp{padding-bottom:100rpx; }
+.page_loading{text-align: center;padding: 20rpx;display: block}
+
+
+.pp_overlay{position: fixed;left: 0;top: 0;right: 0;bottom: 0;z-index: 100;background: rgba(0,0,0,.5);}
+.pp_main{background: rgba(255,255,255,.65);-webkit-backdrop-filter: blur(15px);backdrop-filter: blur(15px);position: fixed;z-index: 101;width: 100%;bottom: 0;left: 0;}
+.ppm_header{border-bottom:1rpx solid #ccc;padding:20rpx;font-size: 28rpx;color: #666;display: flex;justify-content: space-between;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+.ppm_header image{vertical-align: middle}
+.pph_cnt{display: flex;}.pph_cnt view{padding-left: 20rpx}
+.ppm_footer{border-top:1rpx solid #ccc;text-align: center;padding: 20rpx;}
+.ppm_content{max-height:600rpx;overflow: auto}
+.ppm_content scroll-view{height: 600rpx;}
+.ppm_content .menu .cmain{border-bottom-color: #ccc}
+.ppm_content .flexlist .flexlist{border-bottom:1rpx solid #ccc}
+.ppm_content .flexlist .flexmain text{font-size: 26rpx;}
+
+
+.userprofiles .flexmain image{width: 32rpx;height: 32rpx; }
+.userprofiles .fl-image image{border-radius: 50%}
+@import "utils/common.wxss"
+
