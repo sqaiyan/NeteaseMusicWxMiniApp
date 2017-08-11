@@ -1,11 +1,12 @@
 # netmusic-app
 仿网易云音乐APP的微信小程序
 
+(还有Vue版本哦)[https://github.com/sqaiyan/neteasemusic]
 
-node后台接口代码已经发到github 有需求的可以自己部署，欢迎star，请勿使用我的服务器地址。
-后台项目启动后 utils文件中新建bsurl.js文件  输入module.exports="启动地址"
+需后端支持
+下载启动(node服务端)[https://github.com/sqaiyan/netmusic-node]即可
 
- [动图演示地址：](http://7vik7b.com1.z0.glb.clouddn.com/20170308_112339.gif)
+ [动图演示地址：又大又长](http://7vik7b.com1.z0.glb.clouddn.com/20170308_112339.gif)
 
  
 <image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4271.PNG"/>
