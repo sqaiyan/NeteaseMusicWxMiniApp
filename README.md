@@ -1,4 +1,10 @@
 # netmusic-app
+
+那个。。。。我有一个不成熟的小建议。。
+如果。。。我是说如果。。。你觉得有用的话。。
+那个。。。。能不能star一下。。
+
+
 仿网易云音乐APP的微信小程序
 
 [还有Vue版本哦](https://github.com/sqaiyan/neteasemusic)
@@ -8,16 +14,6 @@
 
  [动图演示地址：又大又长](http://7vik7b.com1.z0.glb.clouddn.com/20170308_112339.gif)
 
- 
-<image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4271.PNG"/>
-<image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4279.PNG"/>
-<image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4274.PNG"/>
-<image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4272.PNG"/>
-<image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4276.PNG"/>
-<image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4277.PNG"/>
-<image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4275.PNG"/>
-<image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4273.PNG"/>
-<image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4278.PNG"/>
 
 ##目前实现功能
 
@@ -45,5 +41,13 @@
 * 音质切换
 * 用户动态，粉丝
 * 新歌 新专 分类电台
-
-目前代码结构混乱 是时候来一波大重构了。
+ 
+<image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4271.PNG"/>
+<image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4279.PNG"/>
+<image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4274.PNG"/>
+<image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4272.PNG"/>
+<image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4276.PNG"/>
+<image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4277.PNG"/>
+<image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4275.PNG"/>
+<image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4273.PNG"/>
+<image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4278.PNG"/>
