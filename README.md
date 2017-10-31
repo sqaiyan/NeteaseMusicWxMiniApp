@@ -1,10 +1,4 @@
 # netmusic-app
-
-那个。。。。我有一个不成熟的小建议。。
-如果。。。我是说如果。。。你觉得有用的话。。
-那个。。。。能不能star一下。。
-
-
 仿网易云音乐APP的微信小程序
 
 [还有Vue版本哦](https://github.com/sqaiyan/neteasemusic)
