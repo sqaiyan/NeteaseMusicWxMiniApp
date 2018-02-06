@@ -3,7 +3,8 @@
 <import src="../../../utils/image.wxml" />
 <import src="../../../utils/pp_music.wxml" />
 <view id="playingpage" class=" {{playing?'playing':''}}">
-  <image src="../../../image/cm2_default_play_bg-ip6@2x.jpg" id="coverbg" />
+
+  <image src="../../../image/cm2_default_play_bg-ip6@2x.jpg" id="coverbg" /> 
   <image id="playing-bg" class="blurbg" mode="aspectFill" src="{{music.al.picUrl||music.album.picUrl}}?param=600y600" />
   <view id="playing-zz" hidden="{{showlrc}}">
     <image src="../../../image/aag.png" />

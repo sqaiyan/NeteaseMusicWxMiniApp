@@ -9,7 +9,8 @@ Page({
     onLoad: function () {
         var that=this;
         var id= wx.getStorageSync('user');
-        if(!id){
+        console.log(id)
+        if(!id.account){
             wx.redirectTo({
               url: '../login/index'
             });

@@ -166,7 +166,7 @@ App({
     var m = this.globalData.curplay;
     if (!m.id) return;
     this.globalData.playtype = type;
-    if (cb || this.globalData.playtype == 3) {
+    if (cb) {
       this.playing(type, cb, seek);
     } else {
       this.geturl(function () { that.playing(type, cb, seek); })
@@ -176,7 +176,7 @@ App({
     var that = this
     var m = that.globalData.curplay
     wx.playBackgroundAudio({
-      dataUrl: type == 1 ? m.url : m.mp3Url,
+      dataUrl: m.url,
       title: m.name,
       success: function (res) {
         if (seek != undefined) {

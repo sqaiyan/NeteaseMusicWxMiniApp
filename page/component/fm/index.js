@@ -96,6 +96,7 @@ Page({
         });
     },
     play: function (m) {
+      console.log('fm play')
         common.toggleplay(this, app, function () { })
     },
     nextplay: function () {
