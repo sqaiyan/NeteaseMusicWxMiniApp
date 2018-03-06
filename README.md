@@ -1,4 +1,6 @@
 # netmusic-app
+欢迎star issue
+
 仿网易云音乐APP的微信小程序
 
 [还有Vue版本哦](https://github.com/sqaiyan/neteasemusic)
@@ -42,6 +44,7 @@
 <image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4275.PNG"/>
 <image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/IMG_4273.PNG"/>
 
+如果本示例对您学习小程序有帮助欢迎大佬赏杯奶茶喝
 <image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/MZU%7D0Z%7D_GDRA~W0@$WQSD%5B0.png"/>
 
 
