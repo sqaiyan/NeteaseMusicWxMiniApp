@@ -6,9 +6,6 @@
 需后端支持
 下载启动[node服务端](https://github.com/sqaiyan/netmusic-node)即可
 
- [动图演示地址：又大又长](http://7vik7b.com1.z0.glb.clouddn.com/20170308_112339.gif)
-
-
 ##目前实现功能
 
 1. 用户
