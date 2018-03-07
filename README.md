@@ -44,7 +44,7 @@
 <image width="320" src="https://github.com/sqaiyan/NeteaseMusicWxMiniApp/raw/master/screenshot/IMG_4275.PNG"/>
 <image width="320" src="https://github.com/sqaiyan/NeteaseMusicWxMiniApp/raw/master/screenshot/IMG_4273.PNG"/>
 
-###如果本示例对您学习小程序有帮助欢迎大佬赏杯奶茶喝
+##如果本示例对您学习小程序有帮助欢迎大佬赏杯奶茶喝
 <image width="320" src="http://7vik7b.com1.z0.glb.clouddn.com/MZU%7D0Z%7D_GDRA~W0@$WQSD%5B0.png"/>
 
 
