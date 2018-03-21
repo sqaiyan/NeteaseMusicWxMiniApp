@@ -27,10 +27,12 @@ Page({
           complete: function (r) {
             var src = res.data.data.brs;
             var wifi = r.networkType != 'wifi' ? false : true;
+            var url = src[1080] || src[720] || src[480] || src[240]
+             url = bsurl + 'mv/url?url=' + url
             that.setData({
               id: options.id,
               main: res.data.data,
-              src: wifi ? (src[1080] || src[720] || src[480] || src[240]) : (src[240] || src[480] || src[720] || src[1080]),
+              src:url,
               wifi: wifi,
               loading:false,
               recid: res.data.data.commentThreadId
