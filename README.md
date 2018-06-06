@@ -45,7 +45,7 @@
 <image width="340" src="https://github.com/sqaiyan/NeteaseMusicWxMiniApp/raw/master/screenshot/IMG_4273.PNG"/>
 
 ### 如果本示例对您学习小程序有帮助欢迎大佬赏杯奶茶喝
-<image width="220" src="https://github.com/sqaiyan/NeteaseMusicWxMiniApp/raw/master/screenshot/wx.png"/><image width="220" src="https://github.com/sqaiyan/NeteaseMusicWxMiniApp/raw/master/screenshot/zfb.png"/>
+<image width="220" src="https://github.com/sqaiyan/NeteaseMusicWxMiniApp/raw/master/screenshot/wx.jpg"/><image width="220" src="https://github.com/sqaiyan/NeteaseMusicWxMiniApp/raw/master/screenshot/zfb.jpg"/>
 
 
 
