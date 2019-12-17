@@ -24,13 +24,14 @@
   "window": {
     "navigationBarTextStyle": "#fff",
     "navigationBarTitleText": "Music",
+    "navigationBarTextStyle": "black",
     "backgroundColor": "#fbfcfd",
     "navigationBarBackgroundColor": "#BB2C08"
   },
   "tabBar": {
     "color": "#aaa",
     "selectedColor": "#fff",
-    "borderStyle": "#333",
+    "borderStyle": "black",
     "backgroundColor": "#212121",
     "list": [
       {
