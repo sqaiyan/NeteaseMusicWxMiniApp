@@ -22,7 +22,7 @@
      "page/component/new/index"
   ],
   "window": {
-    "navigationBarTextStyle": "#fff",
+    "navigationBarTextStyle": "white",
     "navigationBarTitleText": "Music",
     "backgroundColor": "#fbfcfd",
     "navigationBarBackgroundColor": "#BB2C08"
@@ -30,7 +30,7 @@
   "tabBar": {
     "color": "#aaa",
     "selectedColor": "#fff",
-    "borderStyle": "#333",
+    "borderStyle": "white",
     "backgroundColor": "#212121",
     "list": [
       {
